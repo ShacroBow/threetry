@@ -7,8 +7,10 @@ const loader = new THREE.TextureLoader();
 export function spawnEarth(greeb: threeb): THREE.Mesh{
 	const touch = greeb.touch;
 	const geo = touch(new THREE.IcosahedronGeometry(1, 9));
+	const tex = loader.load("../textures/earth-map-5k.jpg");
+	tex.colorSpace = THREE.SRGBColorSpace;
 	const mat = touch(new THREE.MeshStandardMaterial({
-		map: loader.load("../textures/earth-map-5k.jpg")
+		map: tex
 	}));
 	const earthMesh = touch(new THREE.Mesh(geo, mat)); 
 	
@@ -18,9 +20,11 @@ export function spawnEarth(greeb: threeb): THREE.Mesh{
 export function lightMesh(greeb: threeb): THREE.Mesh{
 	const touch = greeb.touch;
 	const geo = touch(new THREE.IcosahedronGeometry(1, 9));
-	const matlight = touch(new THREE.MeshStandardMaterial({
+	const tex = loader.load("../textures/earth-nightmap-4k.jpg");
+	tex.colorSpace = THREE.SRGBColorSpace;
+	const matlight = touch(new THREE.MeshBasicMaterial({
 		// color: 0x515151,
-		map: loader.load("../textures/earth-nightmap-4k.jpg"),
+		map: tex,
 		blending: THREE.AdditiveBlending,
 		// transparent: true,
 		// opacity: 0.6
